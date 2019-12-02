@@ -1,0 +1,64 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}
+Testcases
+{% endblock %}
+
+{% block content %}
+<!-- <h1>{{ problem.name }})</h1> -->
+<h1>{{ pid }}</h1>
+
+<h2>Test cases</h2>
+<a href="{% url 'grader:upload_testcase' pid %}">Add a testcase</a>
+<!-- <a href="#">Add multiple testcase</a> -->
+<table class="bordered" style="text-align:center">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Input</th>
+      <th>Output</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in testcases %}
+    <tr>
+      <td>{{ i.pid }}</td>
+      <td>
+        <a href="{{ i.input.url }}" target="_blank">Show input</a>
+      </td>
+      <td>
+        <a href="{{ i.output.url }}" target="_blank">Show output</a>
+      </td>
+      <td>
+        <form method="post" action="{% url 'grader:delete_testcase' i.pid %}">
+          {% csrf_token %}
+          <button type="submit"class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if testcases.has_other_pages %}
+<div class="pagination">
+  <span class="step-links">
+    {% if testcases.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ testcases.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ testcases.number }} of {{ testcases.paginator.num_pages }}.
+    </span>
+
+    {% if testcases.has_next %}
+    <a href="?page={{ testcases.next_page_number }}">next</a>
+    <a href="?page={{ testcases.paginator.num_pages }}">last &raquo;</a> 
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+
+{% endblock %}

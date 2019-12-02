@@ -1,0 +1,54 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}
+Problems
+{% endblock %}
+
+{% block content %}
+<h1>Problem list</h1>
+<a href="{% url 'grader:upload_problem' %}">Add a problem</a>
+
+<table class="bordered" style="text-align:center">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Owner</th>
+      <th>Time limit</th>
+      <th>Memory limit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in problems %}
+    <tr>
+      <td>
+        <a href="{% url 'grader:testcase_list' i.pid %}">{{ i.pid }}</a>
+      </td>
+      <td>{{ i.owner }}</td>
+      <td>{{ i.time_limit }}</td>
+      <td>{{ i.mem_limit }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if problems.has_other_pages %}
+<div class="pagination">
+  <span class="step-links">
+    {% if problems.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ problems.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ problems.number }} of {{ problems.paginator.num_pages }}.
+    </span>
+
+    {% if problems.has_next %}
+    <a href="?page={{ problems.next_page_number }}">next</a>
+    <a href="?page={{ problems.paginator.num_pages }}">last &raquo;</a> 
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+
+{% endblock %}

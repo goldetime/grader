@@ -1,0 +1,5 @@
+psycopg2               # postgresql
+django                 # django framework
+django-widget-tweaks   # widget tweaks
+six                    # six-1.13.0
+requests               # requests-2.22.0

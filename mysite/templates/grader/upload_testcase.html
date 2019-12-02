@@ -1,0 +1,19 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}
+Upload Testcase
+{% endblock %}
+
+{% block content %}
+<div class="title">
+  <h1>Upload testcase</h1>
+</div>
+
+<form enctype="multipart/form-data" method="post" action="">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Upload testcase</button>
+  <input type="Reset" >
+</form>
+
+{% endblock %}

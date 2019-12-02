@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d%d", n,n);
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    scanf("%d", &n);
+    
+    for (i = 0; i < n; i++)
+        printf("programming in c\n");
+    return 0;
+}
+
+<problem>
+  <text>
+    <p>"Сайн байна уу? Си хэл" гэдэг үгийг хэвлэн харуул.</p>
+  </text>
+  <coderesponse queuename="py-queue">
+    <textbox mode="python" tabsize="4"/>
+    <codeparam>
+      <initial_display>
+        // Бодолт энд оруулна уу?
+      </initial_display>
+    <grader_payload>
+{"problem_name": "1A"}
+    </grader_payload>
+    </codeparam>
+  </coderesponse>
+</problem>

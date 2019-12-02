@@ -1,4 +1,4 @@
-# grader
+# django
 
-git remote add origin git@github.com:goldetime/grader.git
+git remote add origin git@github.com:goldetime/django.git
 git push -u origin master

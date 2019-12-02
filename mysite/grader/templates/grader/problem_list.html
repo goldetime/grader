@@ -1,0 +1,96 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}Problems{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'grader:problem_list' %}">Problems</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+  <a href="{% url 'grader:upload_problem' %}" class="btn btn-primary">Add a problem</a>
+</div>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Owner</th>
+      <th>Time limit</th>
+      <th>Memory limit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in problems %}
+    <tr>
+      <td class="align-middle">
+        <a href="{% url 'grader:testcase_list' i.pid %}">{{ i.pid }}</a>
+      </td>
+      <td class="align-middle">
+        {{ i.owner }}
+      </td>
+      <td class="align-middle">
+        {{ i.time_limit }}
+      </td>
+      <td class="align-middle">
+        {{ i.mem_limit }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if problems.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    {% if problems.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1">&laquo; first</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ problems.previous_page_number }}" tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+
+    <!-- <li class="page-item"> -->
+    <!--   Page {{ problems.number }} of {{ problems.paginator.num_pages }}. -->
+    <!-- </li> -->
+    
+    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+    <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+    <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+
+    {% if problems.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ problems.paginator.num_pages }}">last &raquo;</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ problems.next_page_number }}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+<!-- {% if problems.has_other_pages %} -->
+<!-- <div class="pagination"> -->
+<!--   <span class="step-links"> -->
+<!--     {% if problems.has_previous %} -->
+<!--     <a href="?page=1">&laquo; first</a> -->
+<!--     <a href="?page={{ problems.previous_page_number }}">previous</a> -->
+<!--     {% endif %} -->
+
+<!--     <span class="current"> -->
+<!--       Page {{ problems.number }} of {{ problems.paginator.num_pages }}. -->
+<!--     </span> -->
+
+<!--     {% if problems.has_next %} -->
+<!--     <a href="?page={{ problems.next_page_number }}">next</a> -->
+<!--     <a href="?page={{ problems.paginator.num_pages }}">last &raquo;</a>  -->
+<!--     {% endif %} -->
+<!--   </span> -->
+<!-- </div> -->
+<!-- {% endif %} -->
+
+{% endblock %}

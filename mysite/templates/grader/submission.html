@@ -1,0 +1,59 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}
+All submissions
+{% endblock %}
+
+{% block content %}
+<h2>Submissions</h2>
+
+<table cellpadding="100" class="bordered" style="text-align:center">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Problem</th>
+      <th>Who</th>
+      <th>Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in submission %}
+    <tr>
+      <td>
+        <a href="{{ i.source.url }}" target="_blank">{{ i.submission_id }}</a>
+      </td>
+      <td>{{ i.pid }}</td>
+      <td>{{ i.who }}</td>
+      <td>{{ i.when|date:'Y-m-d H:i' }}</td>
+      {% if i.status == "Accepted" %}
+      <td style="color: green">{{ i.status }}</td>
+      {% else %}
+      <td>{{ i.status }}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if submission.has_other_pages %}
+<div class="pagination">
+  <span class="step-links">
+    {% if submission.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ submission.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ submission.number }} of {{ submission.paginator.num_pages }}.
+    </span>
+
+    {% if submission.has_next %}
+    <a href="?page={{ submission.next_page_number }}">next</a>
+    <a href="?page={{ submission.paginator.num_pages }}">last &raquo;</a> 
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+
+{% endblock %}

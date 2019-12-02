@@ -1,0 +1,88 @@
+.mgl {
+  color: #53637D;
+}
+
+table {
+  font-size: 0.875em;
+  margin-top: -0.072em;
+}
+
+table th {
+  font-weight: bold;
+  vertical-align: bottom;
+  text-align: center;
+  padding: 0.858em 0.5em;
+  border-bottom: 0.072em solid #53637D;
+}
+
+table td {
+  font-size: 1em;
+  padding: 0 0.5em;
+  vertical-align: top;
+  width: 1px;
+  white-space: nowrap;
+  padding-top:15px;
+  padding-bottom:15px;
+  padding-right:15px;
+}
+
+table.nested th, table.nested td {
+  font-size: 0.858em;
+  padding: 0 0.25em;
+}
+
+table.bordered {
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+table.bordered td, table.bordered th {
+  border-right: 1px solid #53637D;
+}
+
+table.bordered td:last-child, table.bordered th:last-child {
+  border-right: 0;
+}
+
+table.bordered thead th {
+  background-color: white;
+}
+
+table.bordered tbody tr:nth-child(even) {
+  background-color: white;
+}
+
+table.bordered tbody tr:nth-child(odd) {
+  background-color: #EAEEF3;
+}
+
+table.TaskTypeOptions {
+  border: 1px solid gray;
+  margin: 5px 0px;
+}
+
+table td.wrapping-options {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+table td.wrapping-options label {
+  margin-right: 15px;
+}
+
+table td.partial::after {
+  content: "*";
+}
+
+table.sortable th {
+  white-space: nowrap;
+}
+
+th .column-sort {
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.toggling_on, .toggling_off {
+  cursor: pointer;
+}

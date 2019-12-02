@@ -1,0 +1,7 @@
+curl -v -d "username=lms&password=password" "http://localhost:8040/xqueue/login/"
+
+curl -v -b "sessionid=le02g0bfui3cyhe1z1rucdafm113o0jp" "http://localhost:8040/xqueue/get_submission/?queue_name=py-queue"        in Edx
+curl -v -b "sessionid=le02g0bfui3cyhe1z1rucdafm113o0jp" "http://34.92.186.97:8080/xqueue/get_submission/?queue_name=py-queue"     in Grader sys
+
+curl -v -b "sessionid=le02g0bfui3cyhe1z1rucdafm113o0jp" "http://34.92.186.97:8080/xqueue/put_result/?queue_name=py-queue/{"xqueue_header": "{\"submission_id\": 114, \"submission_key\": \"e9eb90ddc9599e636075000075c6a628\"}", "xqueue_body": "{\"correct\": true, \"score\": 1, \"msg\": \"2/2\\n\"}"}"
+

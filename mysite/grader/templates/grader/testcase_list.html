@@ -1,0 +1,83 @@
+{% extends 'grader/base.html' %}
+
+{% block title %}Testcases{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'grader:problem_list' %}">Problems</a></li>
+  <li class="breadcrumb-item active">{{ pid }}</li>
+{% endblock %}
+
+{% block content %}
+
+<h2>Test cases</h2>
+
+  <div class="mb-4">
+    <a href="{% url 'grader:upload_testcase' pid %}" class="btn btn-primary">Add a testcase</a>
+  </div>
+<table class="table table-striped mb-4">
+  <thead class="thead-inverse">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>TestcaseID</th>
+      <th>Input</th>
+      <th>Output</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in testcases %}
+    <tr>
+      <td>{{ i.pid }}</td>
+      <td>{{ i.pk }}</td>
+      <td>
+        <a href="{{ i.input.url }}" target="_blank">Show input</a>
+      </td>
+      <td>
+        <a href="{{ i.output.url }}" target="_blank">Show output</a>
+      </td>
+      <td>
+        <form method="post" action="{% url 'grader:delete_testcase' pid i.pk %}">
+          {% csrf_token %}
+          <button type="submit"class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if testcases.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    {% if testcases.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1">&laquo; first</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ testcases.previous_page_number }}" tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+
+    <!-- <li class="page-item"> -->
+    <!--   Page {{ testcases.number }} of {{ testcases.paginator.num_pages }}. -->
+    <!-- </li> -->
+    
+    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+    <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+    <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+
+    {% if testcases.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ testcases.paginator.num_pages }}">last &raquo;</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ testcases.next_page_number }}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
